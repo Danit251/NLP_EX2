@@ -1,6 +1,7 @@
 from collections import defaultdict
 import random
 
+
 class PCFG(object):
     def __init__(self):
         self._rules = defaultdict(list)
@@ -33,15 +34,18 @@ class PCFG(object):
             expansion = self.random_expansion(symbol)
             return " ".join(self.gen(s) for s in expansion)
 
-    def random_sent(self):
-        return self.gen("ROOT")
+    def random_sent(self, sent_num):
+        sentences = []
+        for i in range(sent_num):
+            sentences.append(self.gen("ROOT"))
+        return sentences
 
     def random_expansion(self, symbol):
         """
         Generates a random RHS for symbol, in proportion to the weights.
         """
         p = random.random() * self._sums[symbol]
-        for r,w in self._rules[symbol]:
+        for r, w in self._rules[symbol]:
             p = p - w
             if p < 0: return r
         return r
@@ -50,5 +54,22 @@ class PCFG(object):
 if __name__ == '__main__':
 
     import sys
+    # from docopt import docopt
+    #
+    # doc_str = """Usage: generate.py [-n NUM]
+    #    Options:
+    #      -n NUM
+    # """
+    # arguments = docopt(doc_str)
+
     pcfg = PCFG.from_file(sys.argv[1])
-    print(pcfg.random_sent())
+    sent_num = 1
+
+    # check optional argument
+    if len(sys.argv) == 4 and sys.argv[2] == "-n":
+        sent_num = int(sys.argv[3])
+
+    # print all sentences line by line
+    sentences = pcfg.random_sent(sent_num)
+    for sentence in sentences:
+        print(sentence)
