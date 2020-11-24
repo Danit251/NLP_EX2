@@ -33,11 +33,28 @@
 #    Adj = adjective
 
 1	S	NP VP
-1	VP	Verb NP
-2	NP	Det Noun                    # To make the sentences shorter
-1	NP	NP PP
+1   NP NP CC NP                 # a rule that allow to concat NP's (using CC words)
+1   NP  NNP
+1	VP	Verb1 NP
+1	Verb1  Verb1 CC Verb1    # a rule that allow to concat Verb1 (using CC words)
+
+1	VP	Verb0
+1	VP	Verb2 NP IN
+1   VP  Verbz Adj
+1   VP  VBZ NP
+1   VBZ Verbz VBG
+
+
+1	Adj	 RB Adj            # Allowing to concat Adverbs to to an Adj
+
+
+4	NP	Det Noun                    # To make the sentences shorter
+2	NP	NP PP
 1	PP	Prep NP
-2	Noun	Adj Noun                # To allow more adjectives in the average sentence
+2	Noun Adj Noun                # To allow more adjectives in the average sentence
+1   IN  that S                      # after the word that we require to open a new sentence
+1   NP   PRP
+
 
 # Vocabulary.  Your program can see that "ate" is a terminal
 # symbol because there exists no rule for rewriting it.
@@ -45,11 +62,28 @@
 # terminals, like "chief of staff") is called a "preterminal."  Notice
 # that a preterminal is a special kind of nonterminal.
 
-1	Verb	ate
-1	Verb	wanted
-1	Verb	kissed
-1	Verb	understood
-1	Verb	pickled
+
+
+# Separated the verb to its transitive level
+
+# Verbs that dont require aN object
+1   Verb0   sighed
+1   Verb0   thought IN
+
+# Verbs that require one object after them
+1	Verb1	wanted
+1	Verb1	kissed
+1	Verb1	understood
+1	Verb1	pickled
+1   Verb1   worked
+
+# Verbs that require two objects after them
+1	Verb2	perplexed
+
+# Verbs that require an Adj or a Verb of VBG type
+1   Verbz   is
+
+1   VBG   eating
 
 2	Det	a                                   # The words 'a' and 'the' are more common than the word 'every'
 2	Det	the                                 # The words 'a' and 'the' are more common than the word 'every'
@@ -60,13 +94,29 @@
 1	Noun	pickle
 1	Noun	chief of staff
 1	Noun	floor
+1	Noun	proposal
+1	Noun	desk
+
+
+1	NNP	Sally
+1	NNP	Yoav
+1	NNP	Reut
+1	NNP	Ido
+
 
 2	Adj	fine                                # The adjective 'fine' is more common than the other adjectives and goes better with more nouns
 1	Adj	delicious
 1	Adj	perplexed
 1	Adj	pickled
+1	Adj	lazy
 
 2	Prep	with                            # The prepositions 'with' and 'in' are more common than the other adjectives
 1	Prep	on
 1	Prep	under
 2	Prep	in                              # The prepositions 'with' and 'in' are more common than the other adjectives
+
+1   CC  and
+
+1   PRP  it
+
+1   RB  very
