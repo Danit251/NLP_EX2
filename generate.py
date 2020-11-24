@@ -2,6 +2,7 @@ from collections import defaultdict
 import random
 import argparse
 
+
 class PCFG:
     def __init__(self):
         self._rules = defaultdict(list)
@@ -47,7 +48,8 @@ class PCFG:
         p = random.random() * self._sums[symbol]
         for r, w in self._rules[symbol]:
             p = p - w
-            if p < 0: return r
+            if p < 0:
+                return r
         return r
 
 
