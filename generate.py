@@ -1,8 +1,8 @@
 from collections import defaultdict
 import random
+import argparse
 
-
-class PCFG(object):
+class PCFG:
     def __init__(self):
         self._rules = defaultdict(list)
         self._sums = defaultdict(float)
@@ -52,24 +52,14 @@ class PCFG(object):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='PCFG program')
+    parser.add_argument('file')
+    parser.add_argument('-n', default=1, type=int, help='The number of sentences to create')
+    args = parser.parse_args()
 
-    import sys
-    # from docopt import docopt
-    #
-    # doc_str = """Usage: generate.py [-n NUM]
-    #    Options:
-    #      -n NUM
-    # """
-    # arguments = docopt(doc_str)
-
-    pcfg = PCFG.from_file(sys.argv[1])
-    sent_num = 1
-
-    # check optional argument
-    if len(sys.argv) == 4 and sys.argv[2] == "-n":
-        sent_num = int(sys.argv[3])
+    pcfg = PCFG.from_file(args.file)
 
     # print all sentences line by line
-    sentences = pcfg.random_sent(sent_num)
+    sentences = pcfg.random_sent(args.n)
     for sentence in sentences:
         print(sentence)
