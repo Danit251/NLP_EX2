@@ -1,0 +1,129 @@
+# Symbols in the grammar are case-sensitive.
+#
+# This grammar uses a convention that
+#    - terminals are lowercase          (president)
+#    - preterminals are capitalized     (Noun)
+#    - other nonterminals are all-caps  (NP)
+#
+# This convention just makes grammars more readable to humans.  Thus:
+#
+#    - When *you* are writing grammars, you should
+#      follow this convention unless you have a good reason not to.
+#
+#    - But the  *program* should still work with grammars that don't
+#      follow this convention.  So how can the program reliably tell
+#      the difference between terminal and nonterminal symbols?  If
+#      there is at least one rule for rewriting a symbol, then that
+#      symbol is a nonterminal and should be rewritten.
+#######################
+
+# Rules for creating full sentences.
+
+4	ROOT	S .                     # In native language most of the sentences ends with a dot
+1	ROOT	S !
+1	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
+
+# The basic grammar rules.  Here's what the abbreviations stand for:
+#    S  = sentence
+#    NP = noun phrase
+#    VP = verb phrase
+#    PP = prepositional phrase
+#    Det = determiner (sometimes called "article")
+#    Prep = preposition
+#    Adj = adjective
+
+1	S	NP VP
+1	S	NNP VP
+1	S	PRP VP
+1   NP NP CC NP
+1	Verb1  Verb1 CC Verb1    # a rule that allow to concat Verb1 (using CC words)
+
+1	VP	Verb0
+1	VP	Verb1 NP
+1	VP	Verb2 NP RC
+1   VP  Verbz Adj
+1   VP  AUX NP
+1   AUX Verbz VBG
+
+
+1	Adj	 RB Adj            # Allowing to concat Adverbs to to an Adj
+
+
+4	NP	NPD                    # To make the sentences shorter
+2   NP  NPD RC
+2   NP  NPD RC_SUB
+1   NPD Det Noun
+2	NP	NP PP
+
+1	PP	Prep NP
+2	Noun Adj Noun                # To allow more adjectives in the average sentence
+1   RC  that S                      # after the word that we require to open a new sentence
+1   RC_SUB  that VP                      # relative clause that reference the noun outside
+
+
+# Vocabulary.  Your program can see that "ate" is a terminal
+# symbol because there exists no rule for rewriting it.
+# Any symbol that can rewrite as a terminal (or a string of
+# terminals, like "chief of staff") is called a "preterminal."  Notice
+# that a preterminal is a special kind of nonterminal.
+
+
+
+# Separated the verb to its transitive level
+
+# Verbs that don't require an object
+1   Verb0   sighed
+1   Verb0   ate
+1   Verb0   thought RC
+
+# Verbs that require one object after them
+1	Verb1	wanted
+1	Verb1	kissed
+1	Verb1	understood
+1	Verb1	pickled
+1   Verb1   worked
+1   Verb1   ate
+
+# Verbs that require two objects after them
+1	Verb2	perplexed
+
+# Verbs that require an Adj or a Verb of VBG type
+1   Verbz   is
+
+1   VBG   eating
+
+2	Det	a                                   # The words 'a' and 'the' are more common than the word 'every'
+2	Det	the                                 # The words 'a' and 'the' are more common than the word 'every'
+1	Det	every
+
+1	Noun	president
+1	Noun	sandwich
+1	Noun	pickle
+1	Noun	chief of staff
+1	Noun	floor
+1	Noun	proposal
+1	Noun	desk
+
+
+1	NNP	Sally
+1	NNP	Yoav
+1	NNP	Reut
+1	NNP	Ido
+
+
+2	Adj	fine                                # The adjective 'fine' is more common than the other adjectives and goes better with more nouns
+1	Adj	delicious
+1	Adj	perplexed
+1	Adj	pickled
+1	Adj	lazy
+
+2	Prep	with                            # The prepositions 'with' and 'in' are more common than the other adjectives
+1	Prep	on
+1	Prep	under
+2	Prep	in                              # The prepositions 'with' and 'in' are more common than the other adjectives
+
+1   CC  and
+
+1   PRP  it
+
+1   RB  very
