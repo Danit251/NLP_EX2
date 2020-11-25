@@ -1,6 +1,8 @@
+import argparse
 from collections import defaultdict
 import random
 import argparse
+import re
 
 
 class PCFG:
@@ -35,10 +37,25 @@ class PCFG:
             expansion = self.random_expansion(symbol)
             return " ".join(self.gen(s) for s in expansion)
 
-    def random_sent(self, sent_num):
+    def gen_with_tree(self, symbol):
+        if self.is_terminal(symbol):
+            return symbol
+        else:
+            expansion = self.random_expansion(symbol)
+            tree = "(" + symbol
+            for s in expansion:
+                tree += " " + self.gen_with_tree(s)
+            tree += ")"
+
+            return tree
+
+    def random_sent(self, sent_num, t):
         sentences = []
         for i in range(sent_num):
-            sentences.append(self.gen("ROOT"))
+            if t:
+                sentences.append(self.gen_with_tree("ROOT"))
+            else:
+                sentences.append(self.gen("ROOT"))
         return sentences
 
     def random_expansion(self, symbol):
@@ -53,15 +70,17 @@ class PCFG:
         return r
 
 
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='PCFG program')
     parser.add_argument('file')
     parser.add_argument('-n', default=1, type=int, help='The number of sentences to create')
+    parser.add_argument('-t', action='store_true', help='Generating the sentence tree structure')
     args = parser.parse_args()
 
     pcfg = PCFG.from_file(args.file)
 
     # print all sentences line by line
-    sentences = pcfg.random_sent(args.n)
+    sentences = pcfg.random_sent(args.n, args.t)
     for sentence in sentences:
         print(sentence)
