@@ -33,8 +33,9 @@
 #    Adj = adjective
 
 1	S	NP VP
+1	S	NNP VP
+1	S	PRP VP
 1   NP NP CC NP                 # a rule that allow to concat NP's (using CC words)
-1   NP  NNP
 1	VP	Verb1 NP
 1	Verb1  Verb1 CC Verb1    # a rule that allow to concat Verb1 (using CC words)
 
@@ -53,7 +54,6 @@
 1	PP	Prep NP
 2	Noun Adj Noun                # To allow more adjectives in the average sentence
 1   IN  that S                      # after the word that we require to open a new sentence
-1   NP   PRP
 
 
 # Vocabulary.  Your program can see that "ate" is a terminal
