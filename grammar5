@@ -34,6 +34,34 @@
 #    Det = determiner (sometimes called "article")
 #    Prep = preposition
 #    Adj = adjective
+#    RC_SUB = Relative clause that reference the noun outside
+
+# Additional grammar rules
+#    Verb0 = Verbs that dont require an object
+#    Verb1 = Verbs that require one object after them
+#    Verb2 = Verbs that require two objects after them
+#    Verbz = Verbs that require an Adj or a Verb of VBG type
+#    VBG = Progressive Verb
+#    VBZ = Verb Non-terminal
+#    Verbz = Verb terminal
+#    Vb = Basic form Verb
+#    Inter = Interjection words
+
+#    CC = Connector words
+#    PRP = Pronoun words
+#    RB = Adverbs
+
+#    RB_d = Adverbs which have before them a determiner
+#    RB_a = Adverbs with "a" determiner before it
+#    RB_an = Adverbs with "an" determiner before it
+
+#    Adj_d = Adjectives which have before them a determiner
+#    Adj_a = Adjectives with "a" determiner before it
+#    Adj_an = Adjectives with "an" determiner before it
+
+#    Noun_d = Noun which have before them a determiner
+#    Noun_a =   Nouns with "a" determiner before it
+#    Noun_an =  Nouns with "an" determiner before it
 
 1	S	NP VP
 1	S	NNP VP
@@ -107,6 +135,7 @@
 
 # Verbs that require an Adj or a Verb of VBG type
 1   Verbz   is
+1   Verbz   was
 
 1   VBG   eating
 
@@ -163,8 +192,8 @@
 1   RB_a   very
 1   RB_an  only
 
-1 Inter Hey!
-1 Inter Hooray!
-1 Inter Wow!
-1 Inter Oh dear!
-1 Inter Huh?
+1   Inter Hey!
+1   Inter Hooray!
+1   Inter Wow!
+1   Inter Oh dear!
+1   Inter Huh?
