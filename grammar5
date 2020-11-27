@@ -1,0 +1,170 @@
+# a c
+# Symbols in the grammar are case-sensitive.
+#
+# This grammar uses a convention that
+#    - terminals are lowercase          (president)
+#    - preterminals are capitalized     (Noun)
+#    - other nonterminals are all-caps  (NP)
+#
+# This convention just makes grammars more readable to humans.  Thus:
+#
+#    - When *you* are writing grammars, you should
+#      follow this convention unless you have a good reason not to.
+#
+#    - But the  *program* should still work with grammars that don't
+#      follow this convention.  So how can the program reliably tell
+#      the difference between terminal and nonterminal symbols?  If
+#      there is at least one rule for rewriting a symbol, then that
+#      symbol is a nonterminal and should be rewritten.
+#######################
+
+# Rules for creating full sentences.
+
+6	ROOT	S .                     # In native language most of the sentences ends with a dot
+1	ROOT	S !
+1	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
+1	ROOT	NP said that : " S "
+1	ROOT	Inter S .
+
+# The basic grammar rules.  Here's what the abbreviations stand for:
+#    S  = sentence
+#    NP = noun phrase
+#    VP = verb phrase
+#    PP = prepositional phrase
+#    Det = determiner (sometimes called "article")
+#    Prep = preposition
+#    Adj = adjective
+
+1	S	NP VP
+1	S	NNP VP
+1	S	PRP VP
+1   NP NP CC NP
+1	Verb1  Verb1 CC Verb1    # a rule that allow to concat Verb1 (using CC words)
+
+1	VP	Verb0
+1	VP	Verb1 NP
+1	VP	Verb2 NP RC
+1   VP  Verbz Adj
+1   VP  VBZ NP
+1   VBZ Verbz VBG
+7   VP  will Vb NP
+
+4	NP	Noun_d
+1   NP  Noun_d RC
+1   NP  Noun_d RC_SUB
+2	NP	NP PP
+
+2   Noun_d Det_a Noun_a
+2   Noun_d Det_an Noun_an
+
+2   Noun_d Adj_d Noun
+2	Noun   Adj Noun
+1	Noun   Noun_a
+1	Noun   Noun_an
+
+1   Adj_d Det_a Adj_a
+1   Adj_d Det_an Adj_an
+1   Adj_d RB_d Adj
+1   Adj   RB   Adj
+3   Adj   Adj_a
+3   Adj   Adj_an
+
+1   RB_d Det_a RB_a
+1   RB_d Det_an RB_an
+1   RB   RB_an
+1   RB   RB_a
+
+1	PP	Prep NP
+1   RC  that S                      # after the word that we require to open a new sentence
+1   RC_SUB  that VP                      # relative clause that reference the noun outside
+
+
+# Vocabulary.  Your program can see that "ate" is a terminal
+# symbol because there exists no rule for rewriting it.
+# Any symbol that can rewrite as a terminal (or a string of
+# terminals, like "chief of staff") is called a "preterminal."  Notice
+# that a preterminal is a special kind of nonterminal.
+
+
+
+# Separated the verb to its transitive level
+
+# Verbs that don't require an object
+1   Verb0   sighed
+1   Verb0   ate
+1   Verb0   thought RC
+
+# Verbs that require one object after them
+1	Verb1	wanted
+1	Verb1	kissed
+1	Verb1	understood
+1	Verb1	pickled
+1   Verb1   worked
+1   Verb1   ate
+
+# Verbs that require two objects after them
+1	Verb2	perplexed
+
+# Verbs that require an Adj or a Verb of VBG type
+1   Verbz   is
+
+1   VBG   eating
+
+1   Vb    eat
+1   Vb    kiss
+1   Vb    understand
+
+3	Det_a   a
+2	Det_a	the
+1	Det_a	every
+
+3	Det_an  an
+2	Det_an	the
+1	Det_an	every
+
+1	Noun_a	president
+1	Noun_a	sandwich
+1	Noun_a	pickle
+1	Noun_a	chief of staff
+1	Noun_a	floor
+1	Noun_a	proposal
+1	Noun_a	desk
+
+1	Noun_an	apple
+1	Noun_an	avocado
+1	Noun_an	actor
+1	Noun_an	officer
+
+1	NNP	Sally
+1	NNP	Yoav
+1	NNP	Reut
+1	NNP	Ido
+
+2	Adj_a   fine                                # The adjective 'fine' is more common than the other adjectives and goes better with more nouns
+1	Adj_a   delicious
+1	Adj_a   perplexed
+1	Adj_a   pickled
+1	Adj_a   lazy
+
+1	Adj_an   easy
+1	Adj_an   angry
+1	Adj_an   old
+1	Adj_an   important
+
+2	Prep	with                            # The prepositions 'with' and 'in' are more common than the other adjectives
+1	Prep	on
+1	Prep	under
+2	Prep	in                              # The prepositions 'with' and 'in' are more common than the other adjectives
+
+1   CC  and
+
+1   PRP  it
+
+1   RB_a   very
+1   RB_an  only
+
+1 Inter Hey!
+1 Inter Hooray!
+1 Inter Wow!
+1 Inter Oh dear!
+1 Inter Huh?
