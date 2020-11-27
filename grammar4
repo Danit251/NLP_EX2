@@ -1,3 +1,4 @@
+# a c
 # Symbols in the grammar are case-sensitive.
 #
 # This grammar uses a convention that
@@ -45,18 +46,32 @@
 1   VP  AUX NP
 1   AUX Verbz VBG
 
-
-1	Adj	 RB Adj            # Allowing to concat Adverbs to to an Adj
-
-
-4	NP	NPD                    # To make the sentences shorter
-2   NP  NPD RC
-2   NP  NPD RC_SUB
-1   NPD Det Noun
+4	NP	Noun_d
+1   NP  Noun_d RC
+1   NP  Noun_d RC_SUB
 2	NP	NP PP
 
+2   Noun_d Det_a Noun_a
+2   Noun_d Det_an Noun_an
+
+2   Noun_d Adj_d Noun
+2	Noun   Adj Noun
+1	Noun   Noun_a
+1	Noun   Noun_an
+
+1   Adj_d Det_a Adj_a
+1   Adj_d Det_an Adj_an
+1   Adj_d RB_d Adj
+1   Adj   RB   Adj
+3   Adj   Adj_a
+3   Adj   Adj_an
+
+1   RB_d Det_a RB_a
+1   RB_d Det_an RB_an
+1   RB   RB_an
+1   RB   RB_a
+
 1	PP	Prep NP
-2	Noun Adj Noun                # To allow more adjectives in the average sentence
 1   RC  that S                      # after the word that we require to open a new sentence
 1   RC_SUB  that VP                      # relative clause that reference the noun outside
 
@@ -92,30 +107,42 @@
 
 1   VBG   eating
 
-2	Det	a                                   # The words 'a' and 'the' are more common than the word 'every'
-2	Det	the                                 # The words 'a' and 'the' are more common than the word 'every'
-1	Det	every
+3	Det_a   a
+2	Det_a	the
+1	Det_a	every
 
-1	Noun	president
-1	Noun	sandwich
-1	Noun	pickle
-1	Noun	chief of staff
-1	Noun	floor
-1	Noun	proposal
-1	Noun	desk
+3	Det_an  an
+2	Det_an	the
+1	Det_an	every
 
+1	Noun_a	president
+1	Noun_a	sandwich
+1	Noun_a	pickle
+1	Noun_a	chief of staff
+1	Noun_a	floor
+1	Noun_a	proposal
+1	Noun_a	desk
+
+1	Noun_an	apple
+1	Noun_an	avocado
+1	Noun_an	actor
+1	Noun_an	officer
 
 1	NNP	Sally
 1	NNP	Yoav
 1	NNP	Reut
 1	NNP	Ido
 
+2	Adj_a   fine                                # The adjective 'fine' is more common than the other adjectives and goes better with more nouns
+1	Adj_a   delicious
+1	Adj_a   perplexed
+1	Adj_a   pickled
+1	Adj_a   lazy
 
-2	Adj	fine                                # The adjective 'fine' is more common than the other adjectives and goes better with more nouns
-1	Adj	delicious
-1	Adj	perplexed
-1	Adj	pickled
-1	Adj	lazy
+1	Adj_an   easy
+1	Adj_an   angry
+1	Adj_an   old
+1	Adj_an   important
 
 2	Prep	with                            # The prepositions 'with' and 'in' are more common than the other adjectives
 1	Prep	on
@@ -126,4 +153,5 @@
 
 1   PRP  it
 
-1   RB  very
+1   RB_a   very
+1   RB_an  only
