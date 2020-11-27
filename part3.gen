@@ -1,0 +1,5 @@
+(ROOT (S (NP (Det a) (Noun chief of staff)) (VP (Verbz is) (Adj fine))) .)
+(ROOT (S (NNP Reut) (VP (Verbz is) (Adj pickled))) .)
+(ROOT (S (NP (NP (Det a) (Noun (Adj (RB very) (Adj delicious)) (Noun floor))) (PP (Prep with) (NP (Det the) (Noun floor)))) (VP (Verb1 wanted) (NP (Det every) (Noun chief of staff)))) !)
+(ROOT (S (NP (NP (Det the) (Noun (Adj fine) (Noun president))) (PP (Prep in) (NP (NP (Det every) (Noun proposal)) (PP (Prep on) (NP (NP (NP (NP (Det a) (Noun pickle)) (PP (Prep under) (NP (NP (NP (Det the) (Noun pickle)) (PP (Prep in) (NP (NP (Det the) (Noun sandwich)) (PP (Prep in) (NP (Det a) (Noun president)))))) (CC and) (NP (Det a) (Noun desk))))) (PP (Prep with) (NP (Det the) (Noun president)))) (CC and) (NP (Det every) (Noun chief of staff))))))) (VP (Verb0 sighed))) !)
+(ROOT is it true that (S (NP (NP (Det a) (Noun desk)) (CC and) (NP (NP (Det a) (Noun floor)) (PP (Prep in) (NP (NP (Det a) (Noun (Adj delicious) (Noun chief of staff))) (PP (Prep in) (NP (NP (Det a) (Noun proposal)) (PP (Prep in) (NP (Det a) (Noun chief of staff))))))))) (VP (Verb2 perplexed) (NP (Det the) (Noun floor)) (RC that (S (NNP Ido) (VP (Verbz is) (Adj fine)))))) ?)
