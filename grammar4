@@ -18,6 +18,8 @@
 #      symbol is a nonterminal and should be rewritten.
 #######################
 
+
+
 # Rules for creating full sentences.
 
 4	ROOT	S .                     # In native language most of the sentences ends with a dot
@@ -32,6 +34,33 @@
 #    Det = determiner (sometimes called "article")
 #    Prep = preposition
 #    Adj = adjective
+#    RC_SUB = Relative clause that reference the noun outside
+
+# Additional grammar rules
+#    Verb0 = Verbs that dont require an object
+#    Verb1 = Verbs that require one object after them
+#    Verb2 = Verbs that require two objects after them
+#    Verbz = Verbs that require an Adj or a Verb of VBG type
+#    VBG = Progressive Verb
+#    VBZ = Verb Non-terminal
+#    Verbz = Verb terminal
+
+#    CC = Connector words
+#    PRP = Pronoun words
+#    RB = Adverbs
+
+#    RB_d = Adverbs which have before them a determiner
+#    RB_a = Adverbs with "a" determiner before it
+#    RB_an = Adverbs with "an" determiner before it
+
+#    Adj_d = Adjectives which have before them a determiner
+#    Adj_a = Adjectives with "a" determiner before it
+#    Adj_an = Adjectives with "an" determiner before it
+
+#    Noun_d = Noun which have before them a determiner
+#    Noun_a =   Nouns with "a" determiner before it
+#    Noun_an =  Nouns with "an" determiner before it
+
 
 1	S	NP VP
 1	S	NNP VP
@@ -43,8 +72,8 @@
 1	VP	Verb1 NP
 1	VP	Verb2 NP RC
 1   VP  Verbz Adj
-1   VP  AUX NP
-1   AUX Verbz VBG
+1   VP  VBZ NP
+1   VBZ Verbz VBG
 
 4	NP	Noun_d
 1   NP  Noun_d RC
@@ -72,7 +101,7 @@
 1   RB   RB_a
 
 1	PP	Prep NP
-1   RC  that S                      # after the word that we require to open a new sentence
+1   RC  that S                           # after the word that we require to open a new sentence
 1   RC_SUB  that VP                      # relative clause that reference the noun outside
 
 
@@ -133,7 +162,7 @@
 1	NNP	Reut
 1	NNP	Ido
 
-2	Adj_a   fine                                # The adjective 'fine' is more common than the other adjectives and goes better with more nouns
+2	Adj_a   fine         # The adjective 'fine' is more common than the other adjectives and goes better with more nouns
 1	Adj_a   delicious
 1	Adj_a   perplexed
 1	Adj_a   pickled
@@ -144,10 +173,10 @@
 1	Adj_an   old
 1	Adj_an   important
 
-2	Prep	with                            # The prepositions 'with' and 'in' are more common than the other adjectives
+2	Prep	with         # The prepositions 'with' and 'in' are more common than the other adjectives
 1	Prep	on
 1	Prep	under
-2	Prep	in                              # The prepositions 'with' and 'in' are more common than the other adjectives
+2	Prep	in           # The prepositions 'with' and 'in' are more common than the other adjectives
 
 1   CC  and
 
